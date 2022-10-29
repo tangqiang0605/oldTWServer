@@ -1,5 +1,5 @@
 const { SuccessModel } = require("../model/responseModel");
-const { getList, getDetail } = require('../controllers/blog')
+const { getList, getDetail,insertData} = require('../controllers/blog')
 
 const handleBlogRoute = (req, res) => {
   const { method, path, requry, body } = req;
@@ -16,7 +16,11 @@ const handleBlogRoute = (req, res) => {
   }
 
   if (method === 'GET' && path === '/api/getdetail') {
-    return getDetail(1);
+    return getDetail(1).then(res => new SuccessModel(res));
+  }
+
+  if (method === 'POST' && path === '/api/new') {
+    return insertData({ title: body.title, context: body.context, author: body.author }).then(res=>new SuccessModel(res));
   }
 }
 

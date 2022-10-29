@@ -15,13 +15,16 @@ const getList = (author, keyword) => {
 
 const getDetail = (id) => {
   const sql = 'select * from blogs';
-  execSQL(sql).then(result => {
-    console.log(result);
-  })
+  return execSQL(sql);
+}
+
+const insertData = (passage)=>{
+  const sql = `insert into blogs(title,author,context) values ('${passage.title}','${passage.author}','${passage.context}')`;
   return execSQL(sql);
 }
 
 module.exports = {
   getList,
-  getDetail
+  getDetail,
+  insertData
 }
